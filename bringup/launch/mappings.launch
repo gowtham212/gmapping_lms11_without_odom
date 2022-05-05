@@ -1,0 +1,12 @@
+<launch>
+  <node pkg="tf" type="static_transform_publisher" name="base_footprint_map__broadcaster" args="0 0 0.03 0 0 0 base_footprint map 100" />
+  <node pkg="tf" type="static_transform_publisher" name="map_to_laser_broadcaster" args="0 0 0.03 0 0 0 map laser 100" />
+ 
+  <!-- SLAM - Map Building -->
+  <node name="gmapping" pkg="gmapping" type="slam_gmapping">
+    <rosparam file="$(find bringup)/config/gmapping.yaml" command="load"/>
+  </node>
+
+
+
+</launch>

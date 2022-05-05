@@ -1,0 +1,15 @@
+<launch>
+  <arg name="host" default="192.168.12.138" />
+  <arg name="publish_min_range_as_inf" default="false" />
+ <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find LMS1xx)/urdf/sick_lms1xx.urdf.xacro'"/>
+    <!-- Joint State Publisher - Publishes Joint Positions -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+
+  <!-- Robot State Publisher  - Uses URDF and Joint States to compute Transforms -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+ <node pkg="lms1xx" name="lms1xx" type="LMS1xx_node">
+    <param name="host" value="$(arg host)" />
+    <param name="publish_min_range_as_inf" value="$(arg publish_min_range_as_inf)" />
+  </node>
+</launch>
